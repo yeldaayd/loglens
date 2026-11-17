@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.idea/
+.vscode/
+.DS_Store
+
+# Gercek loglar ve uretilen raporlar repoya girmesin
+*.log
+!samples/*.log
+report.json
