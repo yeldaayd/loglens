@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Birim testleri
+        run: python -m unittest discover -s tests -t . -v
+      - name: Ornek loglar uzerinde calistir
+        run: |
+          python -m loglens --auth samples/sample_auth.log --access samples/sample_access.log --year 2026 --json /tmp/report.json || test $? -eq 1
